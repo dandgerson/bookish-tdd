@@ -1,5 +1,75 @@
 # Getting Started with Create React App
 
+## Application Requirement
+
+We will call it Bookish; it’s a simple application about books – as the name implies. In the application, a user could have a book list and can search books by keywords, and users are allowed to navigate to a book detail page and review the description, review, and ranking of the book. We will complete some of the features in an iterative manner, applying ATDD along the way.
+In the application, we will develop several typical features including the book list and book detail pages, as well as the searching and reviewing functionalities.
+
+### Feature 1 – Booklist
+
+In the real world, the granularity of a feature would be much bigger than the ones we’re describing in this book. Typically, there would be many user stories within a feature, such as book list, pagination, the styling of the book list, and so on. Let’s assume there is only one story per feature here.
+
+- Show the booklist.
+
+We can describe the user story in this form:
+As a `user` I want to `see a list of books` So that `I can learn something new`
+
+This is a very popular format to describe a user story, and there are good reasons for that. By describing As a `<role>`, it stresses who would benefit from this feature, and by saying I want to `<do something>`, you’re explaining how the user would interact with the system. Finally, So that `<value>` sentence describes the business value behind this feature.
+
+This format forces us to think from the stakeholder’s perspective and hopefully tell both business analysts and developers what the most important (valuable) point is of the user story they are working on.
+
+The acceptance criteria are:
+
+- Given there are ten books in the system, a user should see ten items on the page.
+- In each item, the following information should be displayed: book name, author, price, and rating.
+
+Acceptance criteria can sometimes be written in the following manner:
+
+- `Given` there are `10` books in the library
+- `When` a user visits the homepage
+- `Then` he/she would see `10` books on the page
+- And each book would contain at least `name`, `author`, `price` and `rating`
+
+The `given` clause explains the current status of the application, `when` it means the user triggers some action, for example, clicks a button or navigates to a page, and `then` is an assertion that states the expected performance of the application.
+
+
+### Feature 2 – Book Detail
+
+-  Show book detail.
+
+As a `user`, I want to `see the details of a book` So that `I can quickly get an understanding of what it’s about`.
+
+And the acceptance criteria are:
+
+- User clicks an item in the book list and is redirected to the details page.
+- The details page displays the book name, author, price, description, and any reviews.
+
+### Feature 3 – Searching
+
+- Searching by book name
+
+As a `user`, I want to `search for a book by its name` So that `I can quickly find what I’m interested in`.
+
+And the acceptance criteria are:
+
+- The user types Refactoring as a search word.
+- Only books with Refactoring in their name are displayed in the booklist.
+
+### Feature 4 – Reviews
+
+- Besides the other information on the detail page
+
+As a `user`, I want to `be able to add a review to a book I have read previously` So that `people who have the same interests could decide if it is worthwhile to read`.
+
+And the corresponding acceptance criteria are:
+
+- A user can read the reviews on the detail page.
+- A user can post a review to a particular book.
+- A user can edit the review they have posted.
+
+
+***
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
