@@ -1,6 +1,14 @@
 import { Typography } from "@mui/material";
+import BookList from "./BookList";
+
+
 
 function App() {
+  const books = [
+    { name: 'Refactoring' },
+    { name: 'Domain-driven design' },
+  ]
+
   return (
     <div>
       <Typography
@@ -10,6 +18,8 @@ function App() {
       >
         Bookish
       </Typography>
+
+      <BookList books={books} />
     </div>
   );
 }
