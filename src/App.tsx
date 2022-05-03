@@ -1,17 +1,8 @@
 import { Typography } from "@mui/material";
-import BookList from "./BookList";
-import useRemoteService from "./hooks/useRemoteService";
+import { Route, Routes } from "react-router-dom";
 
-const BookListContainer = () => {
-  const { data, isLoading, isError } = useRemoteService([])
-
-  return <BookList
-    books={data}
-    isLoading={isLoading}
-    isError={isError}
-  />
-}
-
+import BookListContainer from "./BookListContainer";
+import BookDetailContainer from './BookDetailContainer'
 
 function App() {
 
@@ -25,7 +16,11 @@ function App() {
         Bookish
       </Typography>
 
-      <BookListContainer />
+      <Routes>
+        <Route path="/" element={<BookListContainer />} />
+        <Route path="/books/:id" element={<BookDetailContainer />} />
+      </Routes>
+
     </div>
   );
 }

@@ -6,6 +6,8 @@ const c = {
 }
 
 describe('Bookish application', () => {
+  let booksData = null
+
   before(() => {
     return axios
       .delete(`${c.serverBaseUrl}/books?_cleanup=true`)
@@ -19,13 +21,13 @@ describe('Bookish application', () => {
   })
 
   beforeEach(() => {
-    const books = [
-      { 'name': 'Refactoring', 'id': 1 },
-      { 'name': 'Domain-driven design', 'id': 2 },
+    booksData = [
       { 'name': 'Building Microservices', 'id': 3 },
+      { 'name': 'Domain-driven design', 'id': 2 },
+      { 'name': 'Refactoring', 'id': 1 },
     ]
 
-    return books.map(book => axios.post(`${c.serverBaseUrl}/books`, book, {
+    return booksData.map(book => axios.post(`${c.serverBaseUrl}/books`, book, {
       headers: { 'Content-Type': 'application/json' },
     }))
   })
@@ -42,8 +44,15 @@ describe('Bookish application', () => {
     cy.get('div.book-item').should(books => {
       expect(books).to.have.length(3)
 
-      const titles = [...books].map(book => book.querySelector('h2').innerHTML)
-      expect(titles).to.deep.equal(['Refactoring', 'Domain-driven design', 'Building Microservices'])
+      const titles = [...books].map(book => book.querySelector('h2').innerHTML).sort()
+      expect(titles).to.deep.equal(booksData.map(x => x.name).sort())
     })
+  })
+
+  it('Goes to the detail page', () => {
+    cy.visit(c.clientBaseUrl)
+    cy.get('div.book-item').contains('View Details').eq(0).click()
+    cy.url().should('include', '/books/1')
+    cy.get('h2.book-title').contains('Refactoring')
   })
 })
