@@ -23,7 +23,7 @@ describe('Bookish application', () => {
       { 'name': 'Refactoring', 'id': 1 },
       { 'name': 'Domain-driven design', 'id': 2 },
       { 'name': 'Building Microservices', 'id': 3 },
-    ].sort((a, b) => a.name > b.name ? 1 : -1)
+    ]
 
     return books.map(book => axios.post(`${c.serverBaseUrl}/books`, book, {
       headers: { 'Content-Type': 'application/json' },

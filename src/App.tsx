@@ -1,21 +1,19 @@
 import { Typography } from "@mui/material";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import BookList from "./BookList";
+import useRemoteService from "./hooks/useRemoteService";
 
+const BookListContainer = () => {
+  const { data, isLoading, isError } = useRemoteService([])
+
+  return <BookList
+    books={data}
+    isLoading={isLoading}
+    isError={isError}
+  />
+}
 
 
 function App() {
-  const [books, setBooks] = useState([])
-
-  useEffect(() => {
-    const fetchBooks = async () => {
-      const res = await axios.get('http://localhost:8080/books')
-      setBooks(res.data)
-    }
-
-    fetchBooks()
-  }, [])
 
   return (
     <div>
@@ -27,7 +25,7 @@ function App() {
         Bookish
       </Typography>
 
-      <BookList books={books} />
+      <BookListContainer />
     </div>
   );
 }
