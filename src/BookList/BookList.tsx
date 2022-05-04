@@ -1,6 +1,7 @@
 export type BookType = {
   name: string
   id: number
+  description?: string
 }
 
 const BookList = ({ books, isLoading, isError }: {

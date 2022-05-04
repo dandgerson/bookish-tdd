@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import BookDetail from "./BookDetail"
-import { BookType } from "./BookList"
-import useRemoteService from "./hooks/useRemoteService"
+import { BookType } from "../BookList/BookList"
+import useRemoteService from "../hooks/useRemoteService"
 
 const BookDetailContainer = () => {
   const { id } = useParams()

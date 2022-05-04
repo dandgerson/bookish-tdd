@@ -1,4 +1,4 @@
-import useRemoteService from "./hooks/useRemoteService"
+import useRemoteService from "../hooks/useRemoteService"
 import BookList, { BookType } from "./BookList"
 
 const BookListContainer = () => {

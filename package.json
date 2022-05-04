@@ -28,7 +28,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "e2e": "cypress run",
-    "stub-server": "node stub-server/server"
+    "stub-server:db": "node stub-server/server stub-server/db.json",
+    "stub-server:books": "node stub-server/server stub-server/books.json"
   },
   "eslintConfig": {
     "extends": [
