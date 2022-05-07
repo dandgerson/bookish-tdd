@@ -1,40 +1,69 @@
-const { default: axios } = require("axios")
-
-const c = {
-  clientBaseUrl: 'http://localhost:3000',
-  serverBaseUrl: 'http://localhost:8080',
-}
+import { c } from '../../../src/constants'
 
 describe('Bookish application', () => {
+  const expectationBooks = ['Refactoring', 'Domain-driven design', 'Building Microservices', 'Acceptance Test Driven Development with React']
+
   it('Visits the bookish', () => {
-    cy.visit(c.clientBaseUrl)
-    cy.get('h2[data-test="heading"]').contains('Bookish')
+    goToApp()
+    checkAppTitle()
   })
 
   it('Shows a book list', () => {
-    cy.visit(c.clientBaseUrl)
-    cy.get('div[data-test="book-list"]').should('exist')
-    cy.get('div.book-item').should(books => {
-      expect(books).to.have.length(4)
-
-      const titles = [...books].map(book => book.querySelector('h2').innerHTML)
-
-      expect(titles).to.deep.equal(['Refactoring', 'Domain-driven design', 'Building Microservices', 'Acceptance Test Driven Development with React'])
-    })
+    goToApp()
+    checkBookListWith(expectationBooks)
   })
 
   it('Goes to the detail page', () => {
-    cy.visit(c.clientBaseUrl)
-    cy.get('div.book-item').contains('View Details').eq(0).click()
-    cy.url().should('include', '/books/1')
-    cy.get('h2.book-title').contains('Refactoring')
+    goToApp()
+    gotoNthBookInTheList(0)
+    checkBookDetail(0)
   })
 
   it('Searches for a title', () => {
-    cy.visit(c.clientBaseUrl)
-    cy.get('div.book-item').should('have.length', 4)
-    cy.get('[data-test="search"] input').type('design')
-    cy.get('div.book-item').should('have.length', 1)
-    cy.get('div.book-item').eq(0).contains('Domain-driven design')
+    goToApp()
+    checkBookListWith(expectationBooks)
+    performSearch('design')
+    checkBookListWith(['Domain-driven design'])
   })
 })
+
+function goToApp() {
+  cy.visit(c.clientBaseUrl)
+}
+
+function checkAppTitle() {
+  cy.get('h2[data-test="heading"]').contains('Bookish')
+}
+
+function checkBookListWith(expectation = []) {
+  cy.get('div[data-test="book-list"]').should('exist')
+  cy.get('div.book-item').should(books => {
+    expect(books).to.have.length(expectation.length)
+
+    const titles = [...books].map(book => book.querySelector('h2').innerHTML)
+    expect(titles).to.deep.equal(expectation)
+  })
+}
+
+function gotoNthBookInTheList(index) {
+  cy.get('div.book-item').contains('View Details').eq(index).click()
+}
+
+function checkBookDetail(index) {
+  const bookDetail = {
+    0: {
+      uri: '/books/1',
+      content: 'Refactoring',
+    }
+  }
+
+  const book = bookDetail[index]
+
+  cy.url().should('include', book.uri)
+  cy.get('h2.book-title').contains(book.content)
+}
+
+function performSearch(term) {
+  cy.get('[data-test="search"] input').type(term)
+}
+
