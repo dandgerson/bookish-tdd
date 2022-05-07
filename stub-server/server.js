@@ -1,6 +1,11 @@
 const jsonServer = require('json-server')
 const server = jsonServer.create()
-const router = jsonServer.router(process.argv[2])
+
+const getDB = (path) => {
+  return path === `stub-server/db.json` ? path : require('./books')
+}
+
+const router = jsonServer.router(getDB(process.argv[2]))
 const middlewares = jsonServer.defaults()
 
 server.use((req, res, next) => {

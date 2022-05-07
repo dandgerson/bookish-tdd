@@ -14,7 +14,6 @@ const BookList = ({ books, isLoading, isError }: {
   isError?: boolean
 }) => {
   const classes = useStyles()
-  console.log(classes)
 
   if (isLoading) {
     return <p>Loading...</p>
