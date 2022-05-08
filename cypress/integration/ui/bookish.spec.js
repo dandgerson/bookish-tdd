@@ -3,24 +3,24 @@ import { c } from '../../../src/constants'
 describe('Bookish application', () => {
   const expectationBooks = ['Refactoring', 'Domain-driven design', 'Building Microservices', 'Acceptance Test Driven Development with React']
 
-  it('Visits the bookish', () => {
+  beforeEach(() => {
     goToApp()
+  })
+
+  it('Visits the bookish', () => {
     checkAppTitle()
   })
 
   it('Shows a book list', () => {
-    goToApp()
     checkBookListWith(expectationBooks)
   })
 
   it('Goes to the detail page', () => {
-    goToApp()
     gotoNthBookInTheList(0)
     checkBookDetail(0)
   })
 
   it('Searches for a title', () => {
-    goToApp()
     checkBookListWith(expectationBooks)
     performSearch('design')
     checkBookListWith(['Domain-driven design'])

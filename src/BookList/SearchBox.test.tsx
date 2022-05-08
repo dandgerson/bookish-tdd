@@ -1,10 +1,10 @@
-import { render, screen } from "@testing-library/react"
+import { act, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import SearchBox from "./SearchBox"
 
 
 describe('SearchBox', () => {
-  it('renders input', () => {
+  it('renders input', async () => {
     const props = {
       term: '',
       onSearch: jest.fn()
@@ -12,8 +12,10 @@ describe('SearchBox', () => {
 
     render(<SearchBox {...props} />)
     const input = screen.getByRole('searchbox')
-
+    input.focus()
     userEvent.type(input, 'domain')
+
+    await screen.getByRole('searchbox')
 
     expect(props.onSearch).toHaveBeenCalled()
   })

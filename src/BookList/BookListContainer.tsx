@@ -12,7 +12,9 @@ const BookListContainer = () => {
     setUrl(`${c.serverBaseUrl}/books?q=${term}`)
   }, [setUrl, term])
 
-  const onSearch: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = (e) => setTerm(e.target.value)
+  const onSearch: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = (e) => {
+    setTerm(e.target.value)
+  }
 
   return (
     <>
