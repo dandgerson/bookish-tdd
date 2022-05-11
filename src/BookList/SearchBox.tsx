@@ -12,7 +12,9 @@ const SearchBox = ({ term, onSearch }: { term: string, onSearch: ChangeEventHand
 
   return (
     <TextField
-      role='searchbox'
+      inputProps={{
+        role: 'searchbox',
+      }}
       label='Search'
       value={term}
       data-test='search'

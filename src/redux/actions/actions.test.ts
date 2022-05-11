@@ -36,6 +36,7 @@ describe('BookListContainer related actions', () => {
 
     const store = mockStore({ books: [] })
 
+
     return store.dispatch(fetchBooks('')).then(() => {
       expect(store.getActions()).toEqual(expectedActions)
     })

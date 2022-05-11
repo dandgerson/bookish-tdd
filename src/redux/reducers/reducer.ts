@@ -4,10 +4,10 @@ import { ActionTypesEnum } from "../types"
 
 export type StateType = {
   isLoading: boolean
-  books: BookType[]
+  books?: BookType[]
 } | undefined
 
-const reducer = (state: StateType, action: AnyAction) => {
+const reducer = <StateType>(state: StateType, action: AnyAction) => {
   switch (action.type) {
     case ActionTypesEnum.FETCH_BOOKS_PENDING: {
       return {
